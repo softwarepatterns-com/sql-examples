@@ -1,0 +1,39 @@
+version: '3.1'
+services:
+  mysql-db:
+    image: mysql:latest
+    environment:
+      # MYSQL_USER: root # default
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: exampledb
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./.tmp/data/mysql:/var/lib/mysql
+
+  postgres-db:
+    image: postgres:13
+    environment:
+      # POSTGRES_USER: postgres # default
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: exampledb
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./.tmp/data/postgresql:/var/lib/postgresql/data
+
+  mssql-db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: "YourStrong(!Passw0rd)"
+    ports:
+      - "1433:1433"
+    volumes:
+      - ./.tmp/data/mssql:/var/opt/mssql
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
