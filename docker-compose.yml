@@ -23,10 +23,19 @@ services:
       - ./.tmp/data/postgresql:/var/lib/postgresql/data
 
   mssql-db:
-    image: mcr.microsoft.com/mssql/server:2019-latest
+    platform: linux/arm64/v8
+    image: mcr.microsoft.com/azure-sql-edge:latest
     environment:
       ACCEPT_EULA: Y
+      # SA_USER: sa # default
       SA_PASSWORD: "YourStrong(!Passw0rd)"
+      # MSSQL_DATABASE: master # default, leave blank for sign in.
+      MSSQL_PID: Developer # default
+      # MSSQL_AGENT_ENABLED: true # default
+      # MSSQL_COLLATION: SQL_Latin1_General_CP1_CI_AS # default
+      # MSSQL_LCID: 1033 # default
+      # MSSQL_MEMORY_LIMIT_MB: 2048 # default
+      # MSSQL_TCP_PORT: 1433 # default
     ports:
       - "1433:1433"
     volumes:

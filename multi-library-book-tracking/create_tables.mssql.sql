@@ -5,6 +5,6 @@ CREATE TABLE nested_sets (
   lft INT NOT NULL,
   rgt INT NOT NULL,
   depth INT NOT NULL,
-  parent_id INT,
+  parent_id INT NULL,
   PRIMARY KEY (id, tree_id)
 );
